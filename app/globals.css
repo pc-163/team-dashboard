@@ -127,13 +127,42 @@ body {
     border-radius: 30px;
 }
 
-.form_detail .form-control{
+.form_detail .form-control {
     padding: 12px;
     border-radius: 10px;
     border: 0;
 }
-.form_detail button{
+
+.form_detail button {
     padding: 10px;
     width: 100%;
     font-size: 20px;
+}
+
+#spinner {
+    margin: 0 auto;
+    top: 170px;
+}
+
+.pilot_pic img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    float: left;
+}
+
+.pilot_pic {
+    background: #fff;
+    border-radius: 10px;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.pilot_pic p {
+    margin: 0;
+    font-size: 22px;
+    padding-left: 12px;
+    font-weight: 600;
 }

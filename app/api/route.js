@@ -1,13 +1,16 @@
-import connectDB from "@/db/mongodb";
-import PilotData from "@/db/topic";
+import connectDB from "@/backend/utils/mongodb";
+import PilotData from "@/backend/utils/topic";
 import { NextResponse } from "next/server";
+import multer from 'multer';
+const upload = multer({ dest: 'public/uploads' })
 
 export async function POST(request) {
     const { fullname, email, license, flyinghours, association, profile, facebooklink, instagramlink, youtubelink, wtlink, xclink } = await request.json();
     await connectDB();
-    await PilotData.create({ fullname, email, license, flyinghours, association, profile, facebooklink, instagramlink, youtubelink, wtlink, xclink });
+    const file = await PilotData.create({ fullname, email, license, flyinghours, association, profile, facebooklink, instagramlink, youtubelink, wtlink, xclink });
+    await file.save();
     return NextResponse.json({message: "created"}, { status: 201} );
-}   
+}       
 
 export async function GET() {
     await connectDB();
@@ -15,3 +18,4 @@ export async function GET() {
     return NextResponse.json({data} );
 }   
 
+   

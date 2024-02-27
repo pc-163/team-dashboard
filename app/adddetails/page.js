@@ -10,8 +10,8 @@ export default function Home() {
     const [email, setEmail] = useState('');
     const [license, setLicense] = useState('');
     const [flyinghours, setflyingHours] = useState('');
-    //const [association, setAssociation] = useState('');
-    //const [profile, setProfile] = useState('');
+    const [association, setAssociation] = useState('NA');
+    const [profile, setProfile] = useState('@/public/assets/glider.jpg');
     const [facebooklink, setfacebookLink] = useState('');
     const [instagramlink, setinstagramLink] = useState('');
     const [youtubelink, setyoutubeLink] = useState('');
@@ -22,9 +22,12 @@ export default function Home() {
 
     const router = useRouter();
 
+    const fileChange = () =>{
+
+    }
     const submitData = async (e) => {
         e.preventDefault();
-        if (!fullname || !email || !license || !flyinghours || !facebooklink || !instagramlink || !youtubelink || !wtlink || !xclink) {
+        if (!fullname || !email || !license || !flyinghours || !association || !facebooklink || !instagramlink || !youtubelink || !wtlink || !xclink) {
             setShow(true);
             return;
         }
@@ -35,10 +38,10 @@ export default function Home() {
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ fullname, email, license, flyinghours, facebooklink, instagramlink, youtubelink, wtlink, xclink }),
+                body: JSON.stringify({ fullname, email, license, flyinghours, association, profile, facebooklink, instagramlink, youtubelink, wtlink, xclink }),
             });
             await api.json();
-            
+
             if (api.ok) {
                 router.push('/');
             }
@@ -47,12 +50,13 @@ export default function Home() {
             console.log(error);
         }
 
-        
+
 
     }
 
     return (
         <main>
+       
             <div className="container pt-5">
                 <Row className='p-3'>
                     <Col></Col>
@@ -88,31 +92,33 @@ export default function Home() {
                                     </Form.Group>
                                 </Col>
                             </Row>
-                            {
-                                // <Row className='flex-column flex-lg-row'>
-                                //     <Col>
-                                //         <Form.Group className="mb-3">
-                                //             <Form.Label htmlFor="basic-url">Your Paragliding Association</Form.Label>
-                                //             <Form.Select aria-label="Default select example" value={association} onChange={(event) => setAssociation(event.target.value)}>
-                                //                 <option>Open this select menu</option>
-                                //                 <option value="1">Billing Paragliding Association</option>
-                                //                 <option value="2">BAPA</option>
-                                //                 <option value="3">Extreme Flying Club</option>
-                                //                 <option value="4">Pilot Union Bir</option>
-                                //                 <option value="5">Sky Candy</option>
-                                //                 <option value="6">Nayak Adventure</option>
-                                //                 <option value="7">Mills Peak</option>
-                                //             </Form.Select>
-                                //         </Form.Group>
-                                //     </Col>
-                                //     <Col>
-                                //         <Form.Group controlId="formFile" className="mb-3">
-                                //             <Form.Label>Your Image</Form.Label>
-                                //             <Form.Control type="file" value={profile} onChange={(event) => setProfile(event.target.value)} />
-                                //         </Form.Group>
-                                //     </Col>
-                                // </Row>
-                            }
+
+                            <Row className='flex-column flex-lg-row'>
+                                <Col>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label htmlFor="basic-url">Your Paragliding Association</Form.Label>
+                                        <Form.Select value={association} onChange={(event) => setAssociation(event.target.value)}>
+                                            <option>Open this select menu</option>
+                                            <option value="BPA">Billing Paragliding Association</option>
+                                            <option value="BAPA">Billing Adventure and Paragliding Association</option>
+                                            <option value="EFCB">Extreme Flying Club</option>
+                                            <option value="PUB">Pilot Union Bir</option>
+                                            <option value="SC">Sky Candy</option>
+                                            <option value="NY">Nayak Adventure</option>
+                                            <option value="MP">Mills Peak</option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+
+                                <Col>
+                                    <Form.Group controlId="formFile" className="mb-3">
+                                        <Form.Label>Your Image</Form.Label>
+                                        <Form.Control type="file" onChange={fileChange} />
+                                    </Form.Group>
+                                </Col>
+
+                            </Row>
+
                             <Form.Label htmlFor="basic-url">Your Social Media Links</Form.Label>
                             <Row className='flex-column flex-xl-row'>
                                 <Col>

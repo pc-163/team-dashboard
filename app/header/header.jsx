@@ -6,7 +6,7 @@ import Link from 'next/link';
 const Header = () => {
     return (
         <header>
-            <Navbar expand="lg" className="bg-body-tertiary">
+            <Navbar expand="lg" className="bg-body-tertiary">   
                 <Container fluid>
                     <Link href="/" id={styles.action1}>Prakash Chand 🪂</Link>
                     <Navbar.Toggle aria-controls="navbarScroll" />
@@ -16,7 +16,8 @@ const Header = () => {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Link href="/adddetails"><Button variant="primary">Add Your Details!</Button></Link>
+                            <Link href="/adddetails" className='mx-2'><Button variant="primary">List Your Details!</Button></Link>
+                            <Link href="/contact" className='mx-2'><Button variant="warning">Contact Us</Button></Link>
                         </Nav>
                         <Form className="d-flex">
                             <Form.Control
