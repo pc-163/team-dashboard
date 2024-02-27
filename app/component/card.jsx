@@ -1,4 +1,5 @@
 'use client'
+import { useState, useEffect } from 'react';
 import { Row, Button, Card, Col } from 'react-bootstrap';
 import Picture from "../assets/glider.jpg";
 import Image from 'next/image';
@@ -15,6 +16,34 @@ function Cards() {
             <a>{children}</a>
         </OverlayTrigger>
     );
+
+    const [maindata, setData] = useState([]);
+
+    useEffect(() => {
+        callApi();
+    }, [])
+
+    const callApi = async () => {
+
+        try {
+            const api = await fetch('http://localhost:3000/api');
+            console.log(api);
+            await api.json();
+            if (api) {
+                setData(api);
+            } else {
+                console.log("Details Not Found");
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+
+
+
+    }
+
+
     return (
         <Row md={2} xl={3}>
             <Col className='mb-4'>
@@ -40,7 +69,36 @@ function Cards() {
                     <Socialicons />
                 </Card>
             </Col>
-            
+
+            {
+                // maindata.map((item, index) => (
+                //     <Col className='mb-4' key={item._id}>
+                //         <Card>
+                //             <div className='card-set'>
+                //                 <Card.Body className='text-center p-0'>
+                //                     <Image src={Picture} className="card_image" alt='Glider Image' />
+                //                     <Button id='main_btn'> <AiFillThunderbolt /> Book Your Pilot</Button>
+                //                 </Card.Body>
+                //                 <Card.Body>
+                //                     <div className="head_1">
+                //                         <Card.Title><FaUser /> {item.fullname} </Card.Title>
+                //                         <Card.Text>₹ 2999/per person</Card.Text>
+                //                     </div>
+                //                     <hr />
+                //                     <div className="head_2">
+                //                         <Button variant="primary"><Link title="Pilot License No." id="t-1">{item.license} </Link></Button>
+                //                         <Button variant="secondary"><Link title="Flying Hours" id="t-2">{item.flyinghours} Hours</Link></Button>
+                //                         <Button variant="success"><Link title="Pilot Association Name" id="t-3">{item.flyinghours }</Link></Button>
+                //                     </div>
+                //                 </Card.Body>
+                //             </div>
+                //             <Socialicons facebooklink={item.facebooklink} instagramlink={item.instagramlink} youtubelink={item.youtubelink} wtlink={item.wtlink} xclink={item.xclink}/>
+                //         </Card>
+                //     </Col>
+                // ))
+            }
+
+
         </Row>
     );
 }
