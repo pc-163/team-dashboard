@@ -1,7 +1,7 @@
-import Footer from "./footer/page";
 import "./globals.css";
 import Header from "./header/header";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import FooterBottom from "./footer/footer";
 
 export const metadata = {
   title: "Bir Billing Tandem Pilots List 🪂",
@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
         {children}
-        <Footer/>
+        <FooterBottom />
       </body>
     </html>
   );

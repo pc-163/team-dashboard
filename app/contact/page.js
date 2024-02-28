@@ -17,7 +17,7 @@ const Contact = () => {
     
     const submitData = async (e) => {
         e.preventDefault();
-
+        console.log(fullname, email, calendar, pickupPoint,  contactNo, message, numberPeople );
     }
 
     
@@ -25,7 +25,7 @@ const Contact = () => {
         <>
             <main>
 
-                <div className="container pt-5">
+                <div className="container pt-5 mt-5 mb-5">
                     <Row className='p-3'>
                         <Col></Col>
                         <Col xs={12} md={8} className='form_detail p-4'>

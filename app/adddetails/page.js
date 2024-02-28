@@ -57,7 +57,7 @@ export default function Home() {
     return (
         <main>
        
-            <div className="container pt-5">
+            <div className="container pt-5 mt-5 mb-5 pb-5">
                 <Row className='p-3'>
                     <Col></Col>
                     <Col xs={12} md={8} className='form_detail p-4'>
