@@ -7,7 +7,7 @@ const pilotSchema = new Schema(
         license: String,
         flyinghours: Number,
         association: String,
-        imgpath: String, //typestring
+        profile: String,
         facebooklink: String,
         instagramlink: String,
         youtubelink: String,

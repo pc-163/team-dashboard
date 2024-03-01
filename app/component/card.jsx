@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { Row, Button, Card, Col } from 'react-bootstrap';
-import Picture from "@/public/assets/glider.jpg";
+//import Picture from "@/public/assets/glider.jpg";
 import Image from 'next/image';
 
 import { FaUser } from "react-icons/fa6";
@@ -76,7 +76,7 @@ function Cards() {
                         <Col className='mb-4' key={item._id}>
                             <Card>
                                 <div className='card-set'>
-                                    <Image src={Picture} className="card_image" alt='Glider Image' priority={true} />
+                                 <Image src={item.profile} className="card_image" width='400' height='230' alt='Glider Image' priority={true} />
 
                                     <BookBtn id={item._id}/>
                                     <Card.Body>

@@ -4,3 +4,17 @@
     text-decoration: none;
     font-weight: 700;
 }
+.goTopHidden{
+    display: none;
+}
+
+.goTop{
+    display: block;
+    cursor: pointer;
+    position: fixed;
+    bottom: 8%;
+    right: 35px;
+    font-size: 36px;
+    color: #FF5733;
+}
+

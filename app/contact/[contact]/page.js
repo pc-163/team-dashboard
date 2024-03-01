@@ -106,7 +106,7 @@ const ContactForm = () => {
                                             {
                                                 maindata.map((item, index) => (
                                                     <div className='pilot_pic' key={item._id}>
-                                                        <Image src={Picture} alt={item.fullname} priority={true} />
+                                                        <Image src={item.profile} alt={item.fullname}  width='40' height='40' priority={true} />
                                                         <p>{item.fullname} 🪂</p>
                                                     </div>
                                                 ))

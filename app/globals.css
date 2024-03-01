@@ -4,14 +4,13 @@ body {
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-header{
+/* header{
     position: fixed;
     width: 100%;
     z-index: 9999;
-}
-header { 
     top: 0;
-}
+} */
+
 
 .card_image {
     max-width: 100%;

@@ -8,7 +8,7 @@ const Header = () => {
         <header>
             <Navbar expand="lg" className="bg-body-tertiary">   
                 <Container fluid>
-                    <Link href="/" id={styles.action1}>Prakash Chand 🪂</Link>
+                    <Link href="/" id={styles.action1}>Team Bir Billing 🪂</Link>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav

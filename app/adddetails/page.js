@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Row, Button, Card, InputGroup, Col, Form } from 'react-bootstrap';
 import ToastButton from './toast';
+//import Image from 'next/image';
 
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
     const [license, setLicense] = useState('');
     const [flyinghours, setflyingHours] = useState('');
     const [association, setAssociation] = useState('NA');
-    const [file, setProfile] = useState('');
+    const [profile, setProfile] = useState(null);
     const [facebooklink, setfacebookLink] = useState('');
     const [instagramlink, setinstagramLink] = useState('');
     const [youtubelink, setyoutubeLink] = useState('');
@@ -20,36 +21,40 @@ export default function Home() {
 
     const [show, setShow] = useState(false);
 
-    //const router = useRouter();
+    const router = useRouter();
+
+    const imageData = (e) => {
+        const data = new FileReader();
+        data.readAsDataURL(e.target.files[0]);
+        data.onload = function () {
+            setProfile(data.result);
+            //console.log(data.result);
+        }
+    }
 
     const submitData = async (e) => {
         e.preventDefault();
-        if (!file) return
-
-        // if (!fullname || !email || !license || !flyinghours || !association || !facebooklink || !instagramlink || !youtubelink || !wtlink || !xclink) {
-        //     setShow(true);
-        //     return;
-        // }
+        if (!fullname || !email || !license || !profile || !flyinghours || !association || !facebooklink || !instagramlink || !youtubelink || !wtlink || !xclink) {
+            setShow(true);
+            return;
+        }
 
         try {
-            const formData = new FormData();
-            formData.append("photo", file);
 
             const api = await fetch('http://localhost:3000/api', {
                 method: "POST",
-                // headers: {
-                //     "Content-type": "multipart/form-data",
-                // },
-                body: formData,
-                //body: JSON.stringify({ fullname, email, license, flyinghours, association, facebooklink, instagramlink, youtubelink, wtlink, xclink }),
+                headers: {
+                    "Content-type": "application/json",
+                },
+               
+                body: JSON.stringify({ fullname, email, license, flyinghours, association, profile, facebooklink, instagramlink, youtubelink, wtlink, xclink }),
             });
-           
-            const data = await api.json();
-            console.log('data', data);
 
-            // if (api.ok) {
-                //router.push('/');
-            // }
+            await api.json();
+        
+            if (api.ok) {
+            router.push('/');
+            }
 
         } catch (error) {
             console.log('submit-button catch', error);
@@ -61,7 +66,7 @@ export default function Home() {
 
     return (
         <main>
-
+        
             <div className="container pt-5 mt-5 mb-5 pb-5">
                 <Row className='p-3'>
                     <Col></Col>
@@ -118,7 +123,7 @@ export default function Home() {
                                 <Col>
                                     <Form.Group controlId="formFile" className="mb-3">
                                         <Form.Label>Your Image</Form.Label>
-                                        <Form.Control type="file" name='file' onChange={(e) => setProfile(e.target.files?.[0])} />
+                                        <Form.Control type="file" name='file' onChange={imageData} />
                                     </Form.Group>
                                 </Col>
 
