@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Row, Button, Card, InputGroup, Col, Form } from 'react-bootstrap';
-
+import 'dotenv/config'
 
 const Contact = () => {
 

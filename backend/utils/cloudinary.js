@@ -1,5 +1,4 @@
 import {v2 as cloudinary} from 'cloudinary';
-import fs from "fs";  
 import 'dotenv/config'
 
 cloudinary.config({ 
@@ -8,7 +7,7 @@ cloudinary.config({
   api_secret: process.env.API_SECRET
 });
 
-const uploadFileCloudinary = async (localFilePath) =>{
+const uploadFileCloudinary = async (localFilePath, folder, url) =>{
     try {
         if(!localFilePath) return null;
         const response = await cloudinary.uploader.upload(localFilePath, {
@@ -21,7 +20,6 @@ const uploadFileCloudinary = async (localFilePath) =>{
         console.log("Succesfully Uploaded",  response.url);
         return response;
     } catch (error) {
-        fs.unlinkSync(localFilePath);
         return null;
     }
 }

@@ -11,7 +11,7 @@ export default function Home() {
     const [license, setLicense] = useState('');
     const [flyinghours, setflyingHours] = useState('');
     const [association, setAssociation] = useState('NA');
-    const [profile, setProfile] = useState('@/public/assets/glider.jpg');
+    const [file, setProfile] = useState('');
     const [facebooklink, setfacebookLink] = useState('');
     const [instagramlink, setinstagramLink] = useState('');
     const [youtubelink, setyoutubeLink] = useState('');
@@ -20,34 +20,39 @@ export default function Home() {
 
     const [show, setShow] = useState(false);
 
-    const router = useRouter();
+    //const router = useRouter();
 
-    const fileChange = () =>{
-
-    }
     const submitData = async (e) => {
         e.preventDefault();
-        if (!fullname || !email || !license || !flyinghours || !association || !facebooklink || !instagramlink || !youtubelink || !wtlink || !xclink) {
-            setShow(true);
-            return;
-        }
+        if (!file) return
+
+        // if (!fullname || !email || !license || !flyinghours || !association || !facebooklink || !instagramlink || !youtubelink || !wtlink || !xclink) {
+        //     setShow(true);
+        //     return;
+        // }
 
         try {
+            const formData = new FormData();
+            formData.append("photo", file);
+
             const api = await fetch('http://localhost:3000/api', {
                 method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                },
-                body: JSON.stringify({ fullname, email, license, flyinghours, association, profile, facebooklink, instagramlink, youtubelink, wtlink, xclink }),
+                // headers: {
+                //     "Content-type": "multipart/form-data",
+                // },
+                body: formData,
+                //body: JSON.stringify({ fullname, email, license, flyinghours, association, facebooklink, instagramlink, youtubelink, wtlink, xclink }),
             });
-            await api.json();
+           
+            const data = await api.json();
+            console.log('data', data);
 
-            if (api.ok) {
-                router.push('/');
-            }
+            // if (api.ok) {
+                //router.push('/');
+            // }
 
         } catch (error) {
-            console.log(error);
+            console.log('submit-button catch', error);
         }
 
 
@@ -56,7 +61,7 @@ export default function Home() {
 
     return (
         <main>
-       
+
             <div className="container pt-5 mt-5 mb-5 pb-5">
                 <Row className='p-3'>
                     <Col></Col>
@@ -113,7 +118,7 @@ export default function Home() {
                                 <Col>
                                     <Form.Group controlId="formFile" className="mb-3">
                                         <Form.Label>Your Image</Form.Label>
-                                        <Form.Control type="file" onChange={fileChange} />
+                                        <Form.Control type="file" name='file' onChange={(e) => setProfile(e.target.files?.[0])} />
                                     </Form.Group>
                                 </Col>
 
