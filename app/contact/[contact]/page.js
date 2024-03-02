@@ -1,29 +1,62 @@
 'use client'
 import { useParams } from 'next/navigation';
-//import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Row, Button, Card, InputGroup, Col, Form } from 'react-bootstrap';
+import { Row, Button, Col, Form } from 'react-bootstrap';
 import Image from 'next/image';
 
 
 const ContactForm = () => {
 
-    const [fullname, setFullname] = useState('');
-    const [email, setEmail] = useState('');
+    const [clientName, setFullname] = useState('');
+    const [clientEmail, setEmail] = useState('');
     const [calendar, setCalendar] = useState('');
     const [pickupPoint, setPickupPoint] = useState('');
     const [contactNo, setContactNo] = useState('');
     const [message, setMessage] = useState('');
 
     const [maindata, setData] = useState([]);
+    //console.log("maindata", maindata);
 
     const params = useParams();
     const mainId = params.contact;
 
-    //console.log(mainId);
+    const dataMapping = maindata.map((item) => {
+        return {
+            fullname: item.fullname,
+            license: item.license,
+            profile: item.profile,
+        }
+    });
+
+    const pilotData = dataMapping[0];
+
+    // console.log(firstName.fullname);
+    // console.log(firstName.license);
+    // console.log(firstName.profile);
+
     const submitData = async (e) => {
         e.preventDefault();
 
+        if (!clientName || !clientEmail || !calendar || !pickupPoint || !contactNo || !message || !pilotData ) {
+            return;
+        }
+
+        try {
+
+            const api = await fetch('http://localhost:3000/api/contact', {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({ clientName, clientEmail, calendar, pickupPoint, contactNo, message, pilotData}),
+            });
+
+            await api.json();
+
+        } catch (error) {
+            console.log({ message: error.message });
+        }
     }
 
     const callApi = async () => {
@@ -64,13 +97,13 @@ const ContactForm = () => {
                                     <Col>
                                         <Form.Group className="mb-3">
                                             <Form.Label htmlFor="basic-url">Your Name</Form.Label>
-                                            <Form.Control type="text" placeholder="Prakash Chand" value={fullname} onChange={(event) => setFullname(event.target.value)} />
+                                            <Form.Control type="text" placeholder="Prakash Chand" value={clientName} onChange={(event) => setFullname(event.target.value)} />
                                         </Form.Group>
                                     </Col>
                                     <Col>
                                         <Form.Group className="mb-3">
                                             <Form.Label htmlFor="basic-url">Your Email</Form.Label>
-                                            <Form.Control type="email" placeholder="vijay@gmail.com" value={email} onChange={(event) => setEmail(event.target.value)} />
+                                            <Form.Control type="email" placeholder="vijay@gmail.com" value={clientEmail} onChange={(event) => setEmail(event.target.value)} />
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -105,7 +138,7 @@ const ContactForm = () => {
                                             {
                                                 maindata.map((item, index) => (
                                                     <div className='pilot_pic' key={item._id}>
-                                                        <Image src={item.profile} alt={item.fullname}  width='40' height='40' priority={true} />
+                                                        <Image src={item.profile} alt={item.fullname} width='40' height='40' priority={true} />
                                                         <p>{item.fullname} 🪂</p>
                                                     </div>
                                                 ))

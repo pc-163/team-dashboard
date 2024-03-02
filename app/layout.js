@@ -17,9 +17,9 @@ export default function RootLayout({ children }) {
         <CountProvider>
           <Header />
           {children}
-          <FooterBottom />
-          <GoTopButton />
         </CountProvider>
+        <FooterBottom />
+        <GoTopButton />
       </body>
     </html>
   );

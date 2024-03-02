@@ -1,13 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { Row, Button, Card, InputGroup, Col, Form } from 'react-bootstrap';
+import { Row, Button, Col, Form } from 'react-bootstrap';
 import 'dotenv/config'
 
 const Contact = () => {
 
     const [fullname, setFullname] = useState('');
-    const [email, setEmail] = useState('');
+    const [clientEmail, setEmail] = useState('');
     const [calendar, setCalendar] = useState('');
     const [pickupPoint, setPickupPoint] = useState('');
     const [contactNo, setContactNo] = useState('');
@@ -17,7 +17,7 @@ const Contact = () => {
 
     const submitData = async (e) => {
         e.preventDefault();
-        if (!fullname || !email || !license || !profile || !flyinghours || !association || !facebooklink || !instagramlink || !youtubelink || !wtlink || !xclink) {
+        if (!fullname || !clientEmail || !calendar || !pickupPoint || !contactNo || !message || !numberPeople ) {
             return;
         }
 
@@ -27,9 +27,9 @@ const Contact = () => {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
+                    Accept: "application/json",
                 },
-
-                body: JSON.stringify({ fullname, email, calendar, pickupPoint, contactNo, message, numberPeople }),
+                body: JSON.stringify({ fullname, clientEmail, calendar, pickupPoint, contactNo, message, numberPeople }),
             });
 
             await api.json();
@@ -39,11 +39,8 @@ const Contact = () => {
             // }
 
         } catch (error) {
-            console.log('submit-button catch', error);
+            console.log({ message: error.message });
         }
-
-
-
     }
 
     return (
@@ -66,7 +63,7 @@ const Contact = () => {
                                     <Col>
                                         <Form.Group className="mb-3">
                                             <Form.Label htmlFor="basic-url">Your Email</Form.Label>
-                                            <Form.Control type="email" placeholder="vijay@gmail.com" value={email} onChange={(event) => setEmail(event.target.value)} />
+                                            <Form.Control type="email" placeholder="vijay@gmail.com" value={clientEmail} onChange={(event) => setEmail(event.target.value)} />
                                         </Form.Group>
                                     </Col>
                                 </Row>
