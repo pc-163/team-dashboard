@@ -14,18 +14,43 @@ const Contact = () => {
     const [message, setMessage] = useState('');
     const [numberPeople, setNumberPeople] = useState('');
 
-    
+
     const submitData = async (e) => {
         e.preventDefault();
-        console.log(fullname, email, calendar, pickupPoint,  contactNo, message, numberPeople );
+        if (!fullname || !email || !license || !profile || !flyinghours || !association || !facebooklink || !instagramlink || !youtubelink || !wtlink || !xclink) {
+            return;
+        }
+
+        try {
+
+            const api = await fetch('http://localhost:3000/api/mail', {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+
+                body: JSON.stringify({ fullname, email, calendar, pickupPoint, contactNo, message, numberPeople }),
+            });
+
+            await api.json();
+
+            // if (api.ok) {
+            //     router.push('/');
+            // }
+
+        } catch (error) {
+            console.log('submit-button catch', error);
+        }
+
+
+
     }
 
-    
     return (
         <>
             <main>
 
-                <div className="container pt-5 mt-5 mb-5">
+                <div className="container pt-5 mb-5">
                     <Row className='p-3'>
                         <Col></Col>
                         <Col xs={12} md={8} className='form_detail p-4'>

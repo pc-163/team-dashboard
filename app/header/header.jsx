@@ -2,8 +2,10 @@
 import { Nav, Button, Navbar, Col, Form, Container } from 'react-bootstrap';
 import styles from "../page.module.css";
 import Link from 'next/link';
+import SearchList from '../component/search';
 
 const Header = () => {
+  
     return (
         <header>
             <Navbar expand="lg" className="bg-body-tertiary">   
@@ -19,17 +21,10 @@ const Header = () => {
                             <Link href="/adddetails" className='mx-2'><Button variant="primary">List Your Details!</Button></Link>
                             <Link href="/contact" className='mx-2'><Button variant="warning">Contact Us</Button></Link>
                         </Nav>
-                        <Form className="d-flex">
-                            <Form.Control
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <Button variant="outline-success">Search</Button>
-                        </Form>
+                        <SearchList />
+                        
                     </Navbar.Collapse>
-                </Container>
+                    </Container>
             </Navbar>
         </header>
     );

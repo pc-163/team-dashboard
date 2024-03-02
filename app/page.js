@@ -1,10 +1,9 @@
-import Cards from "./component/card";
-
+import Cards from "./dashboard/card";
 export default function Home() {
-  return (
-    <main>
 
-      <div className="container pt-5 mt-5 pb-5 mb-5">
+  return (
+    <main id="home-height">
+      <div className="container pt-5 pb-5">
         <Cards />
       </div>
 

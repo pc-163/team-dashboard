@@ -15,3 +15,4 @@ export async function GET() {
     const data = await PilotData.find();
     return NextResponse.json({ data });
 }
+

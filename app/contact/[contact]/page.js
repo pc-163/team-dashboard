@@ -4,7 +4,6 @@ import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Row, Button, Card, InputGroup, Col, Form } from 'react-bootstrap';
 import Image from 'next/image';
-import Picture from "@/public/assets/glider.jpg";
 
 
 const ContactForm = () => {
@@ -55,7 +54,7 @@ const ContactForm = () => {
         <>
             <main>
 
-                <div className="container pt-5 mt-5 mb-5">
+                <div className="container pt-5 mb-5">
                     <Row className='p-3'>
                         <Col></Col>
                         <Col xs={12} md={8} className='form_detail p-4'>

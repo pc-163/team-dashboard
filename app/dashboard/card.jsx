@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react';
+//import { useState, useEffect } from 'react';
 import { Row, Button, Card, Col } from 'react-bootstrap';
 //import Picture from "@/public/assets/glider.jpg";
 import Image from 'next/image';
@@ -8,43 +8,31 @@ import { FaUser } from "react-icons/fa6";
 
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import Socialicons from './socialicons';
+import Socialicons from '../component/socialicons';
 import { HashLoader } from 'react-spinners';
-import BookBtn from './bookbtn';
+import BookBtn from '../component/bookbtn';
+
+import MyContext from "../context/context"
+import { useContext } from "react";
+
 
 function Cards() {
+    const contextValue = useContext(MyContext);
+    //console.log("page", contextValue);
+
     const Link = ({ id, children, title }) => (
         <OverlayTrigger overlay={<Tooltip id={id}>{title}</Tooltip>}>
             <a>{children}</a>
         </OverlayTrigger>
     );
 
-    const [maindata, setData] = useState([]);
+    //const [maindata, setData] = useState([]);
 
 
-    const callApi = async () => {
-
-        try {
-            const api = await fetch('http://localhost:3000/api');
-            const data = await api.json();
-
-            if (api.ok) {
-                setData(data.data);
-            } else {
-                console.log("API error:", data.error);
-            }
-
-        } catch (error) {
-            console.log("API error:", error);
-        }
-    }
-
-    useEffect(() => {
-        callApi();
-    }, [])
+   
 
     return (
-        <Row md={2} xl={3}>
+        <Row sm={1} md={2} xl={3}>
             {
                 // <Col className='mb-4'>
                 //     <Card>
@@ -71,14 +59,14 @@ function Cards() {
                 // </Col>
             }
             {
-                maindata.length === 0 ? <HashLoader id='spinner' color="#FF5733" />
-                    : maindata.map((item, index) => (
-                        <Col className='mb-4' key={item._id}>
+                contextValue.maindata.length === 0 ? <HashLoader id='spinner' color="#FF5733" />
+                    : contextValue.maindata.map((item, index) => (
+                        <Col xs={12} className='mb-4' key={item._id}>
                             <Card>
                                 <div className='card-set'>
-                                 <Image src={item.profile} className="card_image" width='400' height='230' alt='Glider Image' priority={true} />
+                                    <Image src={item.profile} className="card_image" width='500' height='230' alt='Glider Image' priority={true} />
 
-                                    <BookBtn id={item._id}/>
+                                    <BookBtn id={item._id} />
                                     <Card.Body>
                                         <div className="head_1">
                                             <Card.Title><FaUser /> {item.fullname} </Card.Title>

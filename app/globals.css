@@ -4,12 +4,16 @@ body {
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-/* header{
-    position: fixed;
-    width: 100%;
-    z-index: 9999;
+
+header {
+    position: sticky;
     top: 0;
-} */
+    z-index: 9999;
+}
+
+#home-height {
+    min-height: 100vh;
+}
 
 
 .card_image {
@@ -146,6 +150,9 @@ body {
     font-size: 20px;
 }
 
+.form_detail #formFile{
+    padding: 6px;
+}
 #spinner {
     margin: 0 auto;
     top: 170px;
