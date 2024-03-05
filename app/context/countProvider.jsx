@@ -5,18 +5,28 @@ import MyContext from "./context"
 const CountProvider = ({ children }) => {
     const [maindata, setData] = useState([]);
 
+    //const isAuthenticated = localStorage.getItem("pilotData");
+
     useEffect(() => {
+        const pilotData = JSON.parse(localStorage.getItem('pilotData'));
+        if (pilotData) {
+            const mergedData = [...maindata, pilotData];
+            setData(mergedData);
+        //setData(prevData => [...prevData, pilotData]);
+        }
         callApi();
     }, [])
 
-    const callApi = async () => {
 
+    const callApi = async () => {
+        
         try {
             const api = await fetch('http://localhost:3000/api');
             const data = await api.json();
 
             if (api.ok) {
                 setData(data.data);
+                localStorage.clear();
             } else {
                 console.log("API error:", data.error);
             }
@@ -34,7 +44,7 @@ const CountProvider = ({ children }) => {
             let result = await fetch(`http://localhost:3000/api`);
             const newdata = await result.json();
             //console.log(newdata.data);
-           const resultData = newdata.data.filter((item) => item.fullname.toLowerCase().includes(key.toLowerCase()));
+            const resultData = newdata.data.filter((item) => item.fullname.toLowerCase().includes(key.toLowerCase()));
             if (resultData) {
                 setData(resultData);
             }
@@ -45,11 +55,11 @@ const CountProvider = ({ children }) => {
     };
 
 
-return <div>
-    <MyContext.Provider value={{ searchHandle, maindata }}>
-        {children}
-    </MyContext.Provider >
-</div>
+    return <div>
+        <MyContext.Provider value={{ searchHandle, maindata }}>
+            {children}
+        </MyContext.Provider >
+    </div>
 };
 
 export default CountProvider;

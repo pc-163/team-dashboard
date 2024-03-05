@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Row, Button, Card, InputGroup, Col, Form } from 'react-bootstrap';
 import ToastButton from '../component/toast';
 //import Image from 'next/image';
@@ -24,16 +24,36 @@ export default function Home() {
     const router = useRouter();
 
     const imageData = (e) => {
-        const data = new FileReader();
-        data.readAsDataURL(e.target.files[0]);
-        data.onload = function () {
-            setProfile(data.result);
-            //console.log(data.result);
+        const file = e.target.files[0];
+        const maxSize = 200 * 1024; // 200 KB in bytes
+        const maxDimensions = { width: 1200, height: 600 };
+
+
+        if (file.size > maxSize) {
+            alert(`File size should not exceed ${maxSize / 1024} KB.`);
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            const img = new Image();
+            img.onload = () => {
+                if (img.width > maxDimensions.width || img.height > maxDimensions.height) {
+                    alert(`Image dimensions should not exceed ${maxDimensions.width} x ${maxDimensions.height} pixels.`);
+                    return;
+                }
+                setProfile(reader.result);
+                //console.log(data.result);
+            };
+            img.src = reader.result;
         }
     }
 
+  
     const submitData = async (e) => {
         e.preventDefault();
+
         if (!fullname || !email || !license || !profile || !flyinghours || !association || !facebooklink || !instagramlink || !youtubelink || !wtlink || !xclink) {
             setShow(true);
             return;
@@ -46,27 +66,23 @@ export default function Home() {
                 headers: {
                     "Content-type": "application/json",
                 },
-               
                 body: JSON.stringify({ fullname, email, license, flyinghours, association, profile, facebooklink, instagramlink, youtubelink, wtlink, xclink }),
             });
 
-            await api.json();
-        
+            const apiData = await api.json();
+            localStorage.setItem('pilotData', JSON.stringify(apiData.file));
             if (api.ok) {
-            router.push('/');
+                router.push('/');
             }
 
         } catch (error) {
             console.log('submit-button catch', error);
         }
-
-
-
     }
 
     return (
         <main>
-        
+
             <div className="container pt-5 pb-5">
                 <Row className='p-3'>
                     <Col></Col>
