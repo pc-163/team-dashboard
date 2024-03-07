@@ -8,25 +8,23 @@ const CountProvider = ({ children }) => {
     //const isAuthenticated = localStorage.getItem("pilotData");
 
     useEffect(() => {
-        const pilotData = JSON.parse(localStorage.getItem('pilotData'));
-        if (pilotData) {
-            const mergedData = [...maindata, pilotData];
-            setData(mergedData);
-        //setData(prevData => [...prevData, pilotData]);
-        }
         callApi();
     }, [])
 
 
     const callApi = async () => {
-        
+
         try {
-            const api = await fetch('http://localhost:3000/api');
+            const api = await fetch('http://localhost:3000/api', {
+                headers: {
+                    //authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
+                }
+            });
             const data = await api.json();
 
             if (api.ok) {
                 setData(data.data);
-                localStorage.clear();
+                //  localStorage.clear();
             } else {
                 console.log("API error:", data.error);
             }

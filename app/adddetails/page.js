@@ -44,20 +44,19 @@ export default function Home() {
                     return;
                 }
                 setProfile(reader.result);
-                //console.log(data.result);
             };
             img.src = reader.result;
         }
     }
 
-  
+
     const submitData = async (e) => {
         e.preventDefault();
 
-        if (!fullname || !email || !license || !profile || !flyinghours || !association || !facebooklink || !instagramlink || !youtubelink || !wtlink || !xclink) {
-            setShow(true);
-            return;
-        }
+        // if (!fullname || !email || !license || !profile || !flyinghours || !association || !facebooklink || !instagramlink || !youtubelink || !wtlink || !xclink) {
+        //     setShow(true);
+        //     return;
+        // }
 
         try {
 
@@ -65,14 +64,19 @@ export default function Home() {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
+                    //authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`,
                 },
                 body: JSON.stringify({ fullname, email, license, flyinghours, association, profile, facebooklink, instagramlink, youtubelink, wtlink, xclink }),
             });
 
             const apiData = await api.json();
-            localStorage.setItem('pilotData', JSON.stringify(apiData.file));
+            //localStorage.setItem('pilotData', JSON.stringify(apiData.file));
+            //localStorage.setItem("token", JSON.stringify(apiData.token));
+
             if (api.ok) {
                 router.push('/');
+            } else {
+                throw new Error('Network response was not ok');
             }
 
         } catch (error) {
@@ -93,13 +97,13 @@ export default function Home() {
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label htmlFor="basic-url">Your Name</Form.Label>
-                                        <Form.Control type="text" placeholder="Ex. Prakash Chand" value={fullname} onChange={(event) => setFullname(event.target.value)} />
+                                        <Form.Control type="text" placeholder="Ex. Radhe Sham" value={fullname} onChange={(event) => setFullname(event.target.value)} />
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label htmlFor="basic-url">Your Email</Form.Label>
-                                        <Form.Control type="email" placeholder="Ex. birbilling@gmail.com" value={email} onChange={(event) => setEmail(event.target.value)} />
+                                        <Form.Control type="email" placeholder="Ex. radhesham@gmail.com" value={email} onChange={(event) => setEmail(event.target.value)} />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -111,6 +115,7 @@ export default function Home() {
                                         <Form.Control type="text" placeholder="Ex. KL-46789" value={license} onChange={(event) => setLicense(event.target.value.toUpperCase())} />
                                     </Form.Group>
                                 </Col>
+
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label htmlFor="basic-url">Your Flying Hours</Form.Label>
@@ -118,24 +123,26 @@ export default function Home() {
                                     </Form.Group>
                                 </Col>
                             </Row>
-
                             <Row className='flex-column flex-lg-row'>
-                                <Col>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label htmlFor="basic-url">Your Paragliding Association</Form.Label>
-                                        <Form.Select value={association} onChange={(event) => setAssociation(event.target.value)}>
-                                            <option>Open this select menu</option>
-                                            <option value="BPA">Billing Paragliding Association</option>
-                                            <option value="BAPA">Billing Adventure and Paragliding Association</option>
-                                            <option value="EFCB">Extreme Flying Club</option>
-                                            <option value="PUB">Pilot Union Bir</option>
-                                            <option value="SC">Sky Candy</option>
-                                            <option value="NY">Nayak Adventure</option>
-                                            <option value="MP">Mills Peak</option>
-                                        </Form.Select>
-                                    </Form.Group>
-                                </Col>
+                                {
 
+                                    //     <Col>
+                                    //         <Form.Group className="mb-3">
+                                    //             <Form.Label htmlFor="basic-url">Your Paragliding Association</Form.Label>
+                                    //             <Form.Select value={association} onChange={(event) => setAssociation(event.target.value)}>
+                                    //                 <option>Open this select menu</option>
+                                    //                 <option value="BPA">Billing Paragliding Association</option>
+                                    //                 <option value="BAPA">Billing Adventure and Paragliding Association</option>
+                                    //                 <option value="EFCB">Extreme Flying Club</option>
+                                    //                 <option value="PUB">Pilot Union Bir</option>
+                                    //                 <option value="SC">Sky Candy</option>
+                                    //                 <option value="NY">Nayak Adventure</option>
+                                    //                 <option value="MP">Mills Peak</option>
+                                    //             </Form.Select>
+                                    //         </Form.Group>
+                                    //     </Col>
+
+                                }
                                 <Col>
                                     <Form.Group controlId="formFile" className="mb-3">
                                         <Form.Label>Your Image</Form.Label>
@@ -145,50 +152,53 @@ export default function Home() {
 
                             </Row>
 
-                            <Form.Label htmlFor="basic-url">Your Social Media Links</Form.Label>
-                            <Row className='flex-column flex-xl-row'>
-                                <Col>
-                                    <InputGroup className="mb-3">
-                                        <InputGroup.Text id="basic-addon3">
-                                            https://facebook.com/
-                                        </InputGroup.Text>
-                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.birbillingindia' value={facebooklink} onChange={(event) => setfacebookLink(event.target.value)} />
-                                    </InputGroup>
-                                </Col>
-                                <Col>
-                                    <InputGroup className="mb-3">
-                                        <InputGroup.Text id="basic-addon3">
-                                            https://instagram.com/
-                                        </InputGroup.Text>
-                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.birbillingindia' value={instagramlink} onChange={(event) => setinstagramLink(event.target.value)} />
-                                    </InputGroup>
-                                </Col>
-                            </Row>
-                            <Row className='flex-column flex-xl-row'>
-                                <Col>
-                                    <InputGroup className="mb-3">
-                                        <InputGroup.Text id="basic-addon3">
-                                            https://youtube.com/@
-                                        </InputGroup.Text>
-                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.birbillingindia' value={youtubelink} onChange={(event) => setyoutubeLink(event.target.value)} />
-                                    </InputGroup>
-                                </Col>
-                                <Col>
-                                    <InputGroup className="mb-3">
-                                        <InputGroup.Text id="basic-addon3">
-                                            https://wa.me/
-                                        </InputGroup.Text>
-                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.918219980875' value={wtlink} onChange={(event) => setwtLink(event.target.value)} />
-                                    </InputGroup>
-                                </Col>
-                            </Row>
+                            {
+                                //     <Form.Label htmlFor="basic-url">Your Social Media Links</Form.Label>
+                                // <Row className='flex-column flex-xl-row'>
+                                //     <Col>
+                                //         <InputGroup className="mb-3">
+                                //             <InputGroup.Text id="basic-addon3">
+                                //                 https://facebook.com/
+                                //             </InputGroup.Text>
+                                //             <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.birbillingindia' value={facebooklink} onChange={(event) => setfacebookLink(event.target.value)} />
+                                //         </InputGroup>
+                                //     </Col>
+                                //     <Col>
+                                //         <InputGroup className="mb-3">
+                                //             <InputGroup.Text id="basic-addon3">
+                                //                 https://instagram.com/
+                                //             </InputGroup.Text>
+                                //             <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.birbillingindia' value={instagramlink} onChange={(event) => setinstagramLink(event.target.value)} />
+                                //         </InputGroup>
+                                //     </Col>
+                                // </Row>
+                                // <Row className='flex-column flex-xl-row'>
+                                //     <Col>
+                                //         <InputGroup className="mb-3">
+                                //             <InputGroup.Text id="basic-addon3">
+                                //                 https://youtube.com/@
+                                //             </InputGroup.Text>
+                                //             <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.birbillingindia' value={youtubelink} onChange={(event) => setyoutubeLink(event.target.value)} />
+                                //         </InputGroup>
+                                //     </Col>
+                                //     <Col>
+                                //         <InputGroup className="mb-3">
+                                //             <InputGroup.Text id="basic-addon3">
+                                //                 https://wa.me/
+                                //             </InputGroup.Text>
+                                //             <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.918219980875' value={wtlink} onChange={(event) => setwtLink(event.target.value)} />
+                                //         </InputGroup>
+                                //     </Col>
+                                // </Row>
 
-                            <InputGroup className="mb-3">
-                                <InputGroup.Text id="basic-addon3">
-                                    XC Track Link
-                                </InputGroup.Text>
-                                <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex. https://www.xcontest.org/world/en/flights/detail:pc163/25.1.2024/08:53' value={xclink} onChange={(event) => sexcLink(event.target.value)} />
-                            </InputGroup>
+                                // <InputGroup className="mb-3">
+                                //     <InputGroup.Text id="basic-addon3">
+                                //         XC Track Link
+                                //     </InputGroup.Text>
+                                //     <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex. https://www.xcontest.org/world/en/flights/detail:pc163/25.1.2024/08:53' value={xclink} onChange={(event) => sexcLink(event.target.value)} />
+                                // </InputGroup>
+
+                            }
                             <Button variant="primary" type="submit" onClick={submitData}>
                                 CLICK HERE
                             </Button>
@@ -199,6 +209,6 @@ export default function Home() {
 
             </div>
             <ToastButton show={show} setShow={setShow} />
-        </main>
+        </main >
     );
 }

@@ -66,7 +66,9 @@ function Cards() {
                                 <div className='card-set'>
                                     <Image src={item.profile} className="card_image" width='500' height='230' alt='Glider Image' priority={true} />
 
-                                    <BookBtn id={item._id} />
+                                    {
+                                       // <BookBtn id={item._id} />
+                                    }
                                     <Card.Body>
                                         <div className="head_1">
                                             <Card.Title><FaUser /> {item.fullname} </Card.Title>

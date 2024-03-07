@@ -5,12 +5,16 @@ import Link from 'next/link';
 import SearchList from '../component/search';
 
 const Header = () => {
-  
+
     return (
         <header>
-            <Navbar expand="lg" className="bg-body-tertiary">   
+            <Navbar expand="lg" className="bg-body-tertiary">
                 <Container fluid>
-                    <Link href="/" id={styles.action1}>Team Bir Billing 🪂</Link>
+                 <Link href="/" id={styles.action1}>Home</Link>
+                
+                    {
+                        //<Link href="/" id={styles.action1}>Team Bir Billing 🪂</Link>
+                    }
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -22,9 +26,9 @@ const Header = () => {
                             <Link href="/contact" className='mx-2'><Button variant="warning">Contact Us</Button></Link>
                         </Nav>
                         <SearchList />
-                        
+
                     </Navbar.Collapse>
-                    </Container>
+                </Container>
             </Navbar>
         </header>
     );
