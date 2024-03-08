@@ -53,11 +53,13 @@ const CountProvider = ({ children }) => {
     };
 
 
-    return <div>
-        <MyContext.Provider value={{ searchHandle, maindata }}>
-            {children}
-        </MyContext.Provider >
-    </div>
+    return (
+        <>
+            <MyContext.Provider value={{ searchHandle, maindata }}>
+                {children}
+            </MyContext.Provider >
+        </>
+    )
 };
 
 export default CountProvider;

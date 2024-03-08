@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Row, Button, Col, Form } from 'react-bootstrap';
 import 'dotenv/config'
+import { toast } from 'react-toastify';
 
 const Contact = () => {
 
@@ -14,12 +15,24 @@ const Contact = () => {
     const [message, setMessage] = useState('');
     const [numberPeople, setNumberPeople] = useState('');
 
+    const [loading, setLoader] = useState(false);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const submitData = async (e) => {
         e.preventDefault();
-        if (!fullname || !clientEmail || !calendar || !pickupPoint || !contactNo || !message || !numberPeople ) {
+        if (!fullname || !emailRegex.test(clientEmail) || !calendar || !pickupPoint || !contactNo || !message || !numberPeople) {
+            toast.error("All fields are required and an email must be similar to ex.demo123@gmail.com !", {
+                autoClose: 1000,
+                hideProgressBar: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            });
+            setLoader(false);
             return;
         }
+        setLoader(true);
 
         try {
 
@@ -34,9 +47,32 @@ const Contact = () => {
 
             await api.json();
 
-            // if (api.ok) {
-            //     router.push('/');
-            // }
+            if (api.ok) {
+                toast.success("Your message has been successfully sent. We will contact you very soon!", {
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                });
+                setFullname('');
+                setEmail('');
+                setCalendar('');
+                setPickupPoint('');
+                setContactNo('');
+                setMessage('');
+                setNumberPeople('');
+                setLoader(false);
+                
+            } else {
+                toast.error("Network response was not ok", {
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                })
+            }
 
         } catch (error) {
             console.log({ message: error.message });
@@ -72,7 +108,7 @@ const Contact = () => {
                                     <Col>
                                         <Form.Group className="mb-3">
                                             <Form.Label htmlFor="basic-url">Your Contact</Form.Label>
-                                            <Form.Control type="tel" placeholder="+919876543210" value={contactNo} onChange={(event) => setContactNo(event.target.value)} />
+                                            <Form.Control type="number" placeholder="+91 9876543210" value={contactNo} onChange={(event) => setContactNo(event.target.value)} />
                                         </Form.Group>
                                     </Col>
                                     <Col>
@@ -116,7 +152,10 @@ const Contact = () => {
 
 
                                 <Button variant="primary" type="submit" onClick={submitData}>
-                                    SUBMIT
+                                    {
+                                        loading ? <p className='mb-0'>Loading...</p>
+                                            : <> SUBMIT </>
+                                    }
                                 </Button>
                             </Form>
                         </Col>

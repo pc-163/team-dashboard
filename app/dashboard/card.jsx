@@ -60,15 +60,12 @@ function Cards() {
             }
             {
                 contextValue.maindata.length === 0 ? <HashLoader id='spinner' color="#FF5733" />
-                    : contextValue.maindata.map((item, index) => (
+                   :  contextValue.maindata.map((item, index) => (
                         <Col xs={12} className='mb-4' key={item._id}>
                             <Card>
                                 <div className='card-set'>
                                     <Image src={item.profile} className="card_image" width='500' height='230' alt='Glider Image' priority={true} />
-
-                                    {
-                                       // <BookBtn id={item._id} />
-                                    }
+                                     <BookBtn id={item._id} />
                                     <Card.Body>
                                         <div className="head_1">
                                             <Card.Title><FaUser /> {item.fullname} </Card.Title>

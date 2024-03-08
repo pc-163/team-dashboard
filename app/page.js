@@ -6,7 +6,6 @@ export default function Home() {
       <div className="container pt-5 pb-5">
         <Cards />
       </div>
-
     </main>
   );
 }

@@ -3,7 +3,8 @@ import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Row, Button, Col, Form } from 'react-bootstrap';
 import Image from 'next/image';
-
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 const ContactForm = () => {
 
@@ -15,7 +16,12 @@ const ContactForm = () => {
     const [message, setMessage] = useState('');
 
     const [maindata, setData] = useState([]);
-    //console.log("maindata", maindata);
+
+    const [loading, setLoader] = useState(false);
+    
+    const router = useRouter();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const params = useParams();
     const mainId = params.contact;
@@ -37,9 +43,18 @@ const ContactForm = () => {
     const submitData = async (e) => {
         e.preventDefault();
 
-        if (!clientName || !clientEmail || !calendar || !pickupPoint || !contactNo || !message || !pilotData ) {
+        if (!clientName || !emailRegex.test(clientEmail) || !calendar || !pickupPoint || !contactNo || !message || !pilotData) {
+            toast.error("All fields are required and an email must be similar to ex.demo123@gmail.com !", {
+                autoClose: 1000,
+                hideProgressBar: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            });
+            setLoader(false);
             return;
         }
+        setLoader(true);
 
         try {
 
@@ -49,11 +64,29 @@ const ContactForm = () => {
                     "Content-type": "application/json",
                     Accept: "application/json",
                 },
-                body: JSON.stringify({ clientName, clientEmail, calendar, pickupPoint, contactNo, message, pilotData}),
+                body: JSON.stringify({ clientName, clientEmail, calendar, pickupPoint, contactNo, message, pilotData }),
             });
 
             await api.json();
 
+            if (api.ok) {
+                toast.success("Your message has been successfully sent. We will contact you very soon!", {
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                });
+                router.push('/');
+            } else {
+                toast.error("Network response was not ok", {
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                })
+            }
         } catch (error) {
             console.log({ message: error.message });
         }
@@ -112,7 +145,7 @@ const ContactForm = () => {
                                     <Col>
                                         <Form.Group className="mb-3">
                                             <Form.Label htmlFor="basic-url">Your Contact</Form.Label>
-                                            <Form.Control type="tel" placeholder="+919876543210" value={contactNo} onChange={(event) => setContactNo(event.target.value)} />
+                                            <Form.Control type="number" placeholder="+91 9876543210" value={contactNo} onChange={(event) => setContactNo(event.target.value)} />
                                         </Form.Group>
                                     </Col>
                                     <Col>
@@ -136,7 +169,8 @@ const ContactForm = () => {
                                         <Form.Group className="mb-3">
                                             <Form.Label htmlFor="basic-url">Your Pilot</Form.Label>
                                             {
-                                                maindata.map((item, index) => (
+                                                maindata.length === 0 ? <p className='mb-0 text-white'>Loading...</p>
+                                                : maindata.map((item, index) => (
                                                     <div className='pilot_pic' key={item._id}>
                                                         <Image src={item.profile} alt={item.fullname} width='40' height='40' priority={true} />
                                                         <p>{item.fullname} 🪂</p>
@@ -162,7 +196,10 @@ const ContactForm = () => {
 
 
                                 <Button variant="primary" type="submit" onClick={submitData}>
-                                    SUBMIT
+                                    {
+                                        loading ? <p className='mb-0'>Loading...</p>
+                                            : <> SUBMIT </>
+                                    }
                                 </Button>
                             </Form>
                         </Col>

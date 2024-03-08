@@ -3,6 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+
 }
 
 header {
@@ -153,7 +154,7 @@ header {
 .form_detail #formFile{
     padding: 6px;
 }
-#spinner {
+#spinner, .load-spinner{
     margin: 0 auto;
     top: 170px;
 }
