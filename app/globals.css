@@ -3,6 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+
 }
 
 header {
@@ -153,7 +154,7 @@ header {
 .form_detail #formFile{
     padding: 6px;
 }
-#spinner {
+#spinner, .load-spinner{
     margin: 0 auto;
     top: 170px;
 }
@@ -180,3 +181,16 @@ header {
     padding-left: 12px;
     font-weight: 600;
 }
+
+
+@media screen and (max-width: 767px) {
+    #nav_buttons {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        margin: 0 auto;
+        background: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+  }

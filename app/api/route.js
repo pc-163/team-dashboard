@@ -7,12 +7,14 @@ export async function POST(request) {
     await connectDB();
     const file = await PilotData.create({ fullname, email, license, flyinghours, association, profile, facebooklink, instagramlink, youtubelink, wtlink, xclink });
     await file.save();
-    return NextResponse.json({file}, { message: "created" }, { status: 201 }, );
+    return NextResponse.json({ file, message: "created"}, { status: 201 });
 }
 
 export async function GET() {
     await connectDB();
     const data = await PilotData.find();
     return NextResponse.json({ data });
+
 }
+
 
