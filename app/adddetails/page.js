@@ -5,6 +5,10 @@ import { useState, useEffect } from 'react';
 import { Row, Button, Card, InputGroup, Col, Form } from 'react-bootstrap';
 //import Image from 'next/image';
 import { toast } from 'react-toastify';
+import 'dotenv/config'
+
+const API = process.env.NEXT_PUBLIC_BASE_URL;
+
 
 export default function Home() {
     const [fullname, setFullname] = useState('');
@@ -83,7 +87,7 @@ export default function Home() {
 
         try {
 
-            const api = await fetch('http://localhost:3000/api', {
+            const api = await fetch(`${API}/api`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",

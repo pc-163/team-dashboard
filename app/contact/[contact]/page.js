@@ -5,6 +5,9 @@ import { Row, Button, Col, Form } from 'react-bootstrap';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import 'dotenv/config'
+
+const API = process.env.NEXT_PUBLIC_BASE_URL;
 
 const ContactForm = () => {
 
@@ -58,7 +61,7 @@ const ContactForm = () => {
 
         try {
 
-            const api = await fetch('http://localhost:3000/api/contact', {
+            const api = await fetch(`${API}/api/contact`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
@@ -95,7 +98,7 @@ const ContactForm = () => {
     const callApi = async () => {
 
         try {
-            const api = await fetch(`http://localhost:3000/api`);
+            const api = await fetch(`${API}/api`);
             const data = await api.json();
 
             if (api.ok) {

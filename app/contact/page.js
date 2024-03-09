@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import { Row, Button, Col, Form } from 'react-bootstrap';
 import 'dotenv/config'
 import { toast } from 'react-toastify';
+import 'dotenv/config'
+
+const API = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Contact = () => {
 
@@ -36,7 +39,7 @@ const Contact = () => {
 
         try {
 
-            const api = await fetch('http://localhost:3000/api/mail', {
+            const api = await fetch(`${API}/api/mail`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",

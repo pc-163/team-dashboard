@@ -11,6 +11,9 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import Socialicons from '../component/socialicons';
 import { HashLoader } from 'react-spinners';
 import BookBtn from '../component/bookbtn';
+import 'dotenv/config'
+
+const API = process.env.NEXT_PUBLIC_BASE_URL;
 
 function Cards() {
 
@@ -22,15 +25,11 @@ function Cards() {
 
     const [maindata, setData] = useState([]);
 
-    useEffect(() => {
-        callApi();
-    }, [])
-
-
+    
     const callApi = async () => {
 
         try {
-            const api = await fetch('http://localhost:3000/api');
+            const api = await fetch(`${API}/api`);
             const data = await api.json();
 
             if (api.ok) {
@@ -44,6 +43,9 @@ function Cards() {
         }
     }
 
+    useEffect(() => {
+        callApi();
+    }, [])
 
     // const searchHandle = async (event) => {
     //     event.preventDefault();
