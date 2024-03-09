@@ -15,10 +15,45 @@ export async function POST(request) {
             from: `Bir Billing ${mailOptions.from}`,
             to: clientEmail,
             bcc: mailOptions.from,
-            subject: `Thanks For Contacting ${clientName}`,
+            subject: `Thanks For Contact Us ${clientName}`,
             // text: message,
-            html: `<b>${clientEmail} - ${calendar} - ${pickupPoint} - ${contactNo} - ${message} - ${pilotData.fullname} - ${pilotData.license}</b>
-            <img src="cid:image/png" alt="Pilot Image" width="100" />`,
+            html: `<div style="max-width: 60%; margin: 0 auto; border: 4px solid #FF5733;padding: 10px 10px 30px;">
+    <table style="margin-bottom: 20px;">
+        <tr>
+            <td style="width: 40%;font-size: 20px;padding: 10px;">Your Name:</td>
+            <td style="width: 60%;padding: 10px;">${clientName}</td>
+        </tr>
+        <tr>
+            <td style="width: 40%;font-size: 20px;padding: 10px;">Your Email:</td>
+            <td style="width: 60%;padding: 10px;">${clientEmail}</td>
+        </tr>
+        <tr>
+            <td style="width: 40%;font-size: 20px;padding: 10px;">Your Number:</td>
+            <td style="width: 60%;padding: 10px;">${contactNo}</td>
+        </tr>
+        <tr>
+            <td style="width: 40%;font-size: 20px;padding: 10px;">Your Flying Date:</td>
+            <td style="width: 60%;padding: 10px;">${calendar}</td>
+        </tr>
+        <tr>
+            <td style="width: 40%;font-size: 20px;padding: 10px;">Your Pickup Point: </td>
+            <td style="width: 60%;padding: 10px;">${pickupPoint}</td>
+        </tr>
+        <tr>
+            <td style="width: 40%;font-size: 20px;padding: 10px;">Your Message: </td>
+            <td style="width: 60%;padding: 10px;">${message}</td>
+        </tr>
+        <tr>
+            <td style="width: 40%;font-size: 20px;padding: 10px;">Your Pilot: </td>
+            <td style="width: 60%;padding: 10px; background-color: #f9f9f9;">
+                <img src="cid:image/png" alt="Pilot Name" style="height: 50px;width: 50px;border-radius: 100px;float: left;" />
+                <span style="float: left;padding: 12px 10px 0;font-size: 20px;">${pilotData.fullname}</span>
+            </td>
+        </tr>
+    </table>
+
+    <a href="tel:+918219980875" style="border-radius: 50px; padding: 10px 20px; background: #FF5733;text-decoration: none;color: white;">Contact For More Detail</a>
+</div>`,
 
             attachments: [
                 {

@@ -181,3 +181,16 @@ header {
     padding-left: 12px;
     font-weight: 600;
 }
+
+
+@media screen and (max-width: 767px) {
+    #nav_buttons {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        margin: 0 auto;
+        background: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+  }

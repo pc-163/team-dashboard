@@ -1,4 +1,5 @@
 'use client'
+//import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Row, Button, Card, InputGroup, Col, Form } from 'react-bootstrap';
@@ -86,15 +87,12 @@ export default function Home() {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
-                    //authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`,
                 },
                 body: JSON.stringify({ fullname, email, license, flyinghours, association, profile, facebooklink, instagramlink, youtubelink, wtlink, xclink }),
             });
 
-            const apiData = await api.json();
-            //localStorage.setItem('pilotData', JSON.stringify(apiData.file));
-            //localStorage.setItem("token", JSON.stringify(apiData.token));
-
+            await api.json();
+           
             if (api.ok) {
                 toast.success("Your Data Successfully Submit!", {
                     autoClose: 3000,
@@ -103,6 +101,7 @@ export default function Home() {
                     draggable: true,
                     progress: undefined,
                 });
+                //revalidatePath('/');
                 router.push('/');
             } else {
                 toast.error("Network response was not ok", {
@@ -142,7 +141,7 @@ export default function Home() {
                                     </Form.Group>
                                 </Col>
                             </Row>
-
+                
                             <Row className='flex-column flex-lg-row'>
                                 <Col>
                                     <Form.Group className="mb-3">

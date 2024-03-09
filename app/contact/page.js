@@ -72,6 +72,7 @@ const Contact = () => {
                     draggable: true,
                     progress: undefined,
                 })
+                setLoader(false);
             }
 
         } catch (error) {
@@ -93,13 +94,13 @@ const Contact = () => {
                                     <Col>
                                         <Form.Group className="mb-3">
                                             <Form.Label htmlFor="basic-url">Your Name</Form.Label>
-                                            <Form.Control type="text" placeholder="Prakash Chand" value={fullname} onChange={(event) => setFullname(event.target.value)} />
+                                            <Form.Control type="text" placeholder="Harpreet Singh" value={fullname} onChange={(event) => setFullname(event.target.value)} />
                                         </Form.Group>
                                     </Col>
                                     <Col>
                                         <Form.Group className="mb-3">
                                             <Form.Label htmlFor="basic-url">Your Email</Form.Label>
-                                            <Form.Control type="email" placeholder="vijay@gmail.com" value={clientEmail} onChange={(event) => setEmail(event.target.value)} />
+                                            <Form.Control type="email" placeholder="harpreet@contact.com" value={clientEmail} onChange={(event) => setEmail(event.target.value)} />
                                         </Form.Group>
                                     </Col>
                                 </Row>
