@@ -83,8 +83,8 @@ const Contact = () => {
     return (
         <>
             <main>
-
-                <div className="container pt-5 mb-5">
+                <div className="container pt-5 pb-5 space_sm">
+                <h2 className='text-center'>Contact Us</h2>
                     <Row className='p-3'>
                         <Col></Col>
                         <Col xs={12} md={8} className='form_detail p-4'>

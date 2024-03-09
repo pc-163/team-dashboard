@@ -18,7 +18,7 @@ const ContactForm = () => {
     const [maindata, setData] = useState([]);
 
     const [loading, setLoader] = useState(false);
-    
+
     const router = useRouter();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -119,8 +119,8 @@ const ContactForm = () => {
     return (
         <>
             <main>
-
-                <div className="container pt-5 mb-5">
+                <div className="container pt-5 pb-5 space_sm">
+                    <h2 className='text-center'>Book Your Paragliding</h2>
                     <Row className='p-3'>
                         <Col></Col>
                         <Col xs={12} md={8} className='form_detail p-4'>
@@ -170,12 +170,12 @@ const ContactForm = () => {
                                             <Form.Label htmlFor="basic-url">Your Pilot</Form.Label>
                                             {
                                                 maindata.length === 0 ? <p className='mb-0 text-white'>Loading...</p>
-                                                : maindata.map((item, index) => (
-                                                    <div className='pilot_pic' key={item._id}>
-                                                        <Image src={item.profile} alt={item.fullname} width='40' height='40' priority={true} />
-                                                        <p>{item.fullname} 🪂</p>
-                                                    </div>
-                                                ))
+                                                    : maindata.map((item, index) => (
+                                                        <div className='pilot_pic' key={item._id}>
+                                                            <Image src={item.profile} alt={item.fullname} width='40' height='40' priority={true} />
+                                                            <p>{item.fullname} 🪂</p>
+                                                        </div>
+                                                    ))
                                             }
                                         </Form.Group>
                                     </Col>

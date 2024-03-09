@@ -121,7 +121,8 @@ export default function Home() {
     return (
         <main>
 
-            <div className="container pt-5 pb-5">
+            <div className="container pt-5 pb-5 space_sm">
+                <h2 className='text-center'>Add Your Details</h2>
                 <Row className='p-3'>
                     <Col></Col>
                     <Col xs={12} md={8} className='form_detail p-4'>
@@ -131,13 +132,13 @@ export default function Home() {
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label htmlFor="basic-url">Your Name</Form.Label>
-                                        <Form.Control type="text" placeholder="Ex. Radhe Sham" value={fullname} onChange={(event) => setFullname(event.target.value)} />
+                                        <Form.Control type="text" placeholder="Sanjay Kumar" value={fullname} onChange={(event) => setFullname(event.target.value)} />
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label htmlFor="basic-url">Your Email</Form.Label>
-                                        <Form.Control type="email" placeholder="Ex. radhesham@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                        <Form.Control type="email" placeholder="sanjay124@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -146,14 +147,14 @@ export default function Home() {
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label htmlFor="basic-url">Your License No.</Form.Label>
-                                        <Form.Control type="text" placeholder="Ex. KL-46789" value={license} onChange={(event) => setLicense(event.target.value.toUpperCase())} />
+                                        <Form.Control type="text" placeholder="KL-46789" value={license} onChange={(event) => setLicense(event.target.value.toUpperCase())} />
                                     </Form.Group>
                                 </Col>
 
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label htmlFor="basic-url">Your Flying Hours</Form.Label>
-                                        <Form.Control type="number" placeholder="Ex. 500" value={flyinghours} onChange={(event) => setflyingHours(event.target.value)} />
+                                        <Form.Control type="number" placeholder="500" value={flyinghours} onChange={(event) => setflyingHours(event.target.value)} />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -189,7 +190,7 @@ export default function Home() {
                                         <InputGroup.Text id="basic-addon3">
                                             https://facebook.com/
                                         </InputGroup.Text>
-                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.birbillingindia' value={facebooklink} onChange={(event) => setfacebookLink(event.target.value)} />
+                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='sanjay0012' value={facebooklink} onChange={(event) => setfacebookLink(event.target.value)} />
                                     </InputGroup>
                                 </Col>
                                 <Col>
@@ -197,7 +198,7 @@ export default function Home() {
                                         <InputGroup.Text id="basic-addon3">
                                             https://instagram.com/
                                         </InputGroup.Text>
-                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.birbillingindia' value={instagramlink} onChange={(event) => setinstagramLink(event.target.value)} />
+                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='sanjay0012' value={instagramlink} onChange={(event) => setinstagramLink(event.target.value)} />
                                     </InputGroup>
                                 </Col>
                             </Row>
@@ -207,7 +208,7 @@ export default function Home() {
                                         <InputGroup.Text id="basic-addon3">
                                             https://youtube.com/@
                                         </InputGroup.Text>
-                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.birbillingindia' value={youtubelink} onChange={(event) => setyoutubeLink(event.target.value)} />
+                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='sanjay0012' value={youtubelink} onChange={(event) => setyoutubeLink(event.target.value)} />
                                     </InputGroup>
                                 </Col>
                                 <Col>
@@ -215,7 +216,7 @@ export default function Home() {
                                         <InputGroup.Text id="basic-addon3">
                                             https://wa.me/
                                         </InputGroup.Text>
-                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex.918219980875' value={wtlink} onChange={(event) => setwtLink(event.target.value)} />
+                                        <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='919876543210' value={wtlink} onChange={(event) => setwtLink(event.target.value)} />
                                     </InputGroup>
                                 </Col>
                             </Row>
@@ -224,7 +225,7 @@ export default function Home() {
                                 <InputGroup.Text id="basic-addon3">
                                     XC Track Link
                                 </InputGroup.Text>
-                                <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='Ex. https://www.xcontest.org/world/en/flights/detail:pc163/25.1.2024/08:53' value={xclink} onChange={(event) => sexcLink(event.target.value)} />
+                                <Form.Control id="basic-url" aria-describedby="basic-addon3" placeholder='https://www.xcontest.org/world/en/flights/detail:pc163/25.1.2024/08:53' value={xclink} onChange={(event) => sexcLink(event.target.value)} />
                             </InputGroup>
                             
                             <Button variant="primary" type="submit" onClick={submitData}>

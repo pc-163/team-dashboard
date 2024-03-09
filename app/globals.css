@@ -10,6 +10,8 @@ header {
     position: sticky;
     top: 0;
     z-index: 9999;
+    box-shadow: 6px -3px 100px -5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
 #home-height {
@@ -189,8 +191,18 @@ header {
         bottom: 0px;
         width: 100%;
         margin: 0 auto;
-        background: #fff;
-        padding: 10px;
+        background: #0dcaf0;
+        padding: 10px 0;
         text-align: center;
+    }
+    #nav_buttons button{
+        font-size: 14px;
+    }
+    footer{
+        display: none;
+    }
+    .space_sm {
+        padding-top: 30px !important;
+        padding-bottom: 80px !important;
     }
   }
