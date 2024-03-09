@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
     const { clientName, clientEmail, calendar, pickupPoint, contactNo, message, pilotData } = await request.json();
     //const pilotImage = fs.readFileSync(pilotData.profile).toString('base64');
-    // console.log("pilotImage", pilotImage);
+    //console.log("pilotImage", pilotData.email);
 
     if (!clientName || !clientEmail || !calendar || !pickupPoint || !contactNo || !message) return NextResponse('Missing fields', { status: 400 });
 
@@ -13,7 +13,7 @@ export async function POST(request) {
         await transporter.sendMail({
             ...mailOptions,
             from: `Bir Billing ${mailOptions.from}`,
-            to: clientEmail,
+            to: `${clientEmail}, ${pilotData.email}`,
             bcc: mailOptions.from,
             subject: `Thanks For Contact Us ${clientName}`,
             // text: message,

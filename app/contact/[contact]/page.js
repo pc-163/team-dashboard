@@ -34,6 +34,7 @@ const ContactForm = () => {
             fullname: item.fullname,
             license: item.license,
             profile: item.profile,
+            email: item.email,
         }
     });
 
@@ -80,8 +81,11 @@ const ContactForm = () => {
                     draggable: true,
                     progress: undefined,
                 });
+                setLoader(false);
                 router.push('/');
+
             } else {
+                setLoader(false);
                 toast.error("Network response was not ok", {
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -89,8 +93,10 @@ const ContactForm = () => {
                     draggable: true,
                     progress: undefined,
                 })
+
             }
         } catch (error) {
+            setLoader(false);
             console.log({ message: error.message });
         }
     }
