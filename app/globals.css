@@ -207,7 +207,7 @@ header {
         text-align: center;
     }
     #nav_buttons button{
-        font-size: 14px;
+        font-size: 13px;
     }
     footer{
         display: none;
@@ -220,7 +220,7 @@ header {
         padding: 8px;
     }
     .space_sm {
-        padding: 30px 0 60px;
+        padding: 30px 10px 60px;
     }
     .card_search input{
         max-width: 90%;
