@@ -12,6 +12,7 @@ import Socialicons from '../component/socialicons';
 import { HashLoader } from 'react-spinners';
 import BookBtn from '../component/bookbtn';
 import 'dotenv/config'
+import SearchList from '../component/search';
 
 const API = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -47,25 +48,28 @@ function Cards() {
         callApi();
     }, [])
 
-    // const searchHandle = async (event) => {
-    //     event.preventDefault();
-    //     let key = event.target.value;
-    //     if (key) {
-    //         let result = await fetch(`http://localhost:3000/api`);
-    //         const newdata = await result.json();
-    //         const resultData = newdata.data.filter((item) => item.fullname.toLowerCase().includes(key.toLowerCase()));
-    //         if (resultData) {
-    //             setData(resultData);
-    //         }
+    const searchHandle = async (event) => {
+        event.preventDefault();
+        let key = event.target.value;
+        if (key) {
+            let result = await fetch(`${API}/api`);
+            const newdata = await result.json();
+            const resultData = newdata.data.filter((item) => item.fullname.toLowerCase().includes(key.toLowerCase()));
+            if (resultData) {
+                setData(resultData);
+            }
 
-    //     } else {
-    //         callApi();
-    //     }
-    // };
+        } else {
+            callApi();
+        }
+    };
 
    
 
     return (
+        <>
+        <SearchList searchHandle={searchHandle} maindata={maindata}/> 
+
         <Row sm={1} md={2} xl={3}>
             {
                 maindata.length === 0 ? <HashLoader id='spinner' color="#FF5733" />
@@ -96,6 +100,7 @@ function Cards() {
 
 
         </Row>
+        </>
     );
 }
 

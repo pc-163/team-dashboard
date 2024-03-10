@@ -14,9 +14,9 @@ header {
     background-color: #fff;
 }
 
-#home-height {
+/* #home-height {
     min-height: 100vh;
-}
+} */
 
 
 .card_image {
@@ -53,17 +53,17 @@ header {
     left: 30%; */
     /* opacity: 0; */
     transition: 0.5s ease;
-    background: #fff;
+    background: #FF5733;
     border: 0;
     border-radius: 50px;
     padding: 10px 20px;
-    color: #FF5733;
+    color: #fff;
     margin-top: -30px;
     font-weight: 700;
 }
 
 .card-set #main_btn:hover {
-    background: #FF5733;
+    background: #49D38F;
     color: #fff;
 }
 
@@ -183,8 +183,19 @@ header {
     padding-left: 12px;
     font-weight: 600;
 }
-
-
+.space_sm {
+    padding: 60px 0;
+}
+.card_search input{
+    max-width: 50%;
+    background: #fff;
+    box-shadow: 6px -3px 100px -5px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+.card_search{
+    margin-bottom: 10px;
+}
 @media screen and (max-width: 767px) {
     #nav_buttons {
         position: fixed;
@@ -201,8 +212,18 @@ header {
     footer{
         display: none;
     }
-    .space_sm {
-        padding-top: 30px !important;
-        padding-bottom: 80px !important;
+    .head_2 .btn {
+        font-size: 12px;
+        padding: 6px;
     }
+    .card-set .card-body{
+        padding: 8px;
+    }
+    .space_sm {
+        padding: 30px 0 60px;
+    }
+    .card_search input{
+        max-width: 90%;
+    }
+
   }

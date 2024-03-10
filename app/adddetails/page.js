@@ -125,11 +125,11 @@ export default function Home() {
     return (
         <main>
 
-            <div className="container pt-5 pb-5 space_sm">
+            <div className="container space_sm">
                 <h2 className='text-center'>Add Your Details</h2>
-                <Row className='p-3'>
+                <Row className='p-2'>
                     <Col></Col>
-                    <Col xs={12} md={8} className='form_detail p-4'>
+                    <Col xs={12} md={8} className='form_detail px-3 py-4'>
 
                         <Form>
                             <Row className='flex-column flex-lg-row'>

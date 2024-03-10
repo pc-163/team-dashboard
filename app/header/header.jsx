@@ -11,7 +11,7 @@ const Header = () => {
                 <Container fluid className='justify-content-center'>
                     <Link href="/" id={styles.action1}>Team Bir Billing 🪂</Link>
                         <Nav
-                            className="my-2 my-lg-0 d-inline m-sm-auto" id='nav_buttons'
+                            className="my-lg-0 d-inline m-sm-auto" id='nav_buttons'
                             navbarScroll
                         >
                         <Link href="/" className='mx-2'><Button variant="primary">Home</Button></Link>
